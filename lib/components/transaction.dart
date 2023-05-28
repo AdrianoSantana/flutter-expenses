@@ -9,58 +9,61 @@ class TransactionsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: transactions
-          .map(
-            (tr) => Card(
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 15.0,
-                      vertical: 10.0,
+    return Container(
+      height: 500,
+      child: ListView.builder(
+        itemCount: transactions.length,
+        itemBuilder: (ctx, index) {
+          final tr = transactions[index];
+          return Card(
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 15.0,
+                    vertical: 10.0,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: (Colors.purple[800])!,
+                      width: 2,
                     ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: (Colors.purple[800])!,
-                        width: 2,
-                      ),
+                  ),
+                  padding: const EdgeInsets.all(12.0),
+                  child: Text(
+                    'R\$ ${tr.value.toStringAsFixed(2)}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                      color: Colors.purple[800],
                     ),
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      'R\$ ${tr.value.toStringAsFixed(2)}',
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      tr.title,
                       style: TextStyle(
+                        color: Colors.grey[600],
                         fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: Colors.purple[800],
+                        fontSize: 16.0,
                       ),
                     ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        tr.title,
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16.0,
-                        ),
+                    Text(
+                      DateFormat('d MMM y').format(tr.date),
+                      style: const TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.grey,
                       ),
-                      Text(
-                        DateFormat('d MMM y').format(tr.date),
-                        style: const TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey,
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                    )
+                  ],
+                ),
+              ],
             ),
-          )
-          .toList(),
+          );
+        },
+      ),
     );
   }
 }
