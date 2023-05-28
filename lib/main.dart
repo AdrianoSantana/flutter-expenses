@@ -42,6 +42,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       transactions.add(newTransaction);
     });
+
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -50,6 +52,8 @@ class _HomePageState extends State<HomePage> {
       builder: (_) {
         return TransactionForm(onSubmit: _addTransaction);
       },
+      useSafeArea: true,
+      backgroundColor: Colors.purple[800],
     );
   }
 
