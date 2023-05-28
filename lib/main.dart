@@ -46,10 +46,11 @@ class _HomePageState extends State<HomePage> {
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (_) {
-          return TransactionForm(onSubmit: _addTransaction);
-        });
+      context: context,
+      builder: (_) {
+        return TransactionForm(onSubmit: _addTransaction);
+      },
+    );
   }
 
   @override
@@ -59,7 +60,7 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Despesas pessoais'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => _openTransactionFormModal(context),
             icon: const Icon(Icons.add),
           ),
         ],
@@ -74,9 +75,6 @@ class _HomePageState extends State<HomePage> {
             ),
             Column(
               children: [
-                TransactionForm(
-                  onSubmit: _addTransaction,
-                ),
                 TransactionsList(transactions: transactions),
               ],
             )
@@ -84,7 +82,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () => _openTransactionFormModal(context),
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
