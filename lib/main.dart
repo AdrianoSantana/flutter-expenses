@@ -14,6 +14,9 @@ class ExpensesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
+      theme: ThemeData(
+        primaryColor: Colors.green[400],
+      ),
     );
   }
 }
@@ -53,7 +56,6 @@ class _HomePageState extends State<HomePage> {
         return TransactionForm(onSubmit: _addTransaction);
       },
       useSafeArea: true,
-      backgroundColor: Colors.purple[800],
     );
   }
 
@@ -61,11 +63,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text('Despesas pessoais'),
         actions: [
           IconButton(
             onPressed: () => _openTransactionFormModal(context),
-            icon: const Icon(Icons.add),
+            icon: Icon(Icons.add),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(
+                  Theme.of(context).primaryColor),
+            ),
           ),
         ],
       ),
