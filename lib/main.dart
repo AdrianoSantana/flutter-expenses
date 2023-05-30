@@ -16,6 +16,7 @@ class ExpensesApp extends StatelessWidget {
       home: HomePage(),
       theme: ThemeData(
         primaryColor: Colors.green[400],
+        fontFamily: 'Pangolin',
       ),
     );
   }
@@ -30,8 +31,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Transaction> transactions = [
-    Transaction(id: 't1', title: 'Açafrão', value: 12.50, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Headset', value: 133.49, date: DateTime.now())
+    //Transaction(id: 't1', title: 'Açafrão', value: 12.50, date: DateTime.now()),
+    //Transaction(id: 't2', title: 'Headset', value: 133.49, date: DateTime.now())
   ];
 
   _addTransaction(String title, double value) {
@@ -64,7 +65,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text('Despesas pessoais'),
+        title: const Text(
+          'Despesas pessoais',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             onPressed: () => _openTransactionFormModal(context),
