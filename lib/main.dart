@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'components/transaction.dart';
@@ -31,9 +32,33 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Transaction> transactions = [
-    //Transaction(id: 't1', title: 'Açafrão', value: 12.50, date: DateTime.now()),
-    //Transaction(id: 't2', title: 'Headset', value: 133.49, date: DateTime.now())
+    Transaction(
+        id: 't1',
+        title: 'Açafrão',
+        value: 10.0,
+        date: DateTime.now().subtract(const Duration(days: 2))),
+    Transaction(
+        id: 't2',
+        title: 'Headset',
+        value: 10.0,
+        date: DateTime.now().subtract(const Duration(days: 2))),
+    Transaction(id: 't2', title: 'Headset', value: 20.0, date: DateTime.now()),
+    Transaction(id: 't2', title: 'Headset', value: 20.0, date: DateTime.now()),
+    Transaction(
+        id: 't2',
+        title: 'Headset',
+        value: 1000.0,
+        date: DateTime.now().subtract(const Duration(days: 33))),
   ];
+
+  List<Transaction> get _recentTransactions {
+    DateTime lastSeventhDay = DateTime.now().subtract(const Duration(days: 7));
+
+    List<Transaction> recents =
+        transactions.where((tr) => tr.date.isAfter(lastSeventhDay)).toList();
+
+    return recents;
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -84,10 +109,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Card(
-              elevation: 5,
-              child: Text('Gráfico de despesas'),
-            ),
+            Chart(recentTransactions: _recentTransactions),
             Column(
               children: [
                 TransactionsList(transactions: transactions),
