@@ -22,50 +22,33 @@ class TransactionsList extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final tr = transactions[index];
                 return Card(
-                  child: Row(
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 15.0,
-                          vertical: 10.0,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: 2,
-                          ),
-                        ),
-                        padding: const EdgeInsets.all(12.0),
-                        child: Text(
-                          'R\$ ${tr.value.toStringAsFixed(2)}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                            color: Theme.of(context).primaryColor,
-                          ),
+                  elevation: 5,
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 8.0,
+                    horizontal: 5.0,
+                  ),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 79, 118, 122),
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: FittedBox(
+                          child: Text('R\$ ${tr.value}'),
                         ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            tr.title,
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                          Text(
-                            DateFormat('d MMM y').format(tr.date),
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          )
-                        ],
+                    ),
+                    title: Text(
+                      tr.title,
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontFamily: 'Pangolin',
+                        fontSize: 24,
                       ),
-                    ],
+                    ),
+                    subtitle: Text(
+                      DateFormat('d MMM y').format(tr.date),
+                    ),
                   ),
                 );
               },
