@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
-
   const TransactionForm({super.key, required this.onSubmit});
 
   @override
