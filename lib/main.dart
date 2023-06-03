@@ -31,25 +31,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Transaction> transactions = [
-    Transaction(
-        id: 't1',
-        title: 'Açafrão',
-        value: 10.0,
-        date: DateTime.now().subtract(const Duration(days: 2))),
-    Transaction(
-        id: 't2',
-        title: 'Headset',
-        value: 10.0,
-        date: DateTime.now().subtract(const Duration(days: 2))),
-    Transaction(id: 't2', title: 'Headset', value: 20.0, date: DateTime.now()),
-    Transaction(id: 't2', title: 'Headset', value: 20.0, date: DateTime.now()),
-    Transaction(
-        id: 't2',
-        title: 'Headset',
-        value: 1000.0,
-        date: DateTime.now().subtract(const Duration(days: 33))),
-  ];
+  List<Transaction> transactions = [];
 
   List<Transaction> get _recentTransactions {
     DateTime lastSeventhDay = DateTime.now().subtract(const Duration(days: 7));
@@ -60,12 +42,12 @@ class _HomePageState extends State<HomePage> {
     return recents;
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime selectedDate) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: selectedDate,
     );
 
     setState(() {
@@ -89,6 +71,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           'Despesas pessoais',
@@ -97,11 +80,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () => _openTransactionFormModal(context),
-            icon: Icon(Icons.add),
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).primaryColor),
-            ),
+            icon: const Icon(Icons.add),
           ),
         ],
       ),
@@ -119,6 +98,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
         onPressed: () => _openTransactionFormModal(context),
         child: const Icon(Icons.add),
       ),
