@@ -49,17 +49,22 @@ class _TransactionFormState extends State<TransactionForm> {
           children: [
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(
-                labelText: 'Título',
-              ),
+              decoration: InputDecoration(
+                  labelText: 'Título',
+                  labelStyle: TextStyle(
+                    fontSize: MediaQuery.of(context).textScaleFactor * 20,
+                  )),
               onSubmitted: (_) => _submitForm(),
             ),
             TextField(
               controller: _valueController,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Valor (R\$)',
+                labelStyle: TextStyle(
+                  fontSize: MediaQuery.of(context).textScaleFactor * 20,
+                ),
               ),
               onSubmitted: (_) => _submitForm(),
             ),
@@ -69,7 +74,11 @@ class _TransactionFormState extends State<TransactionForm> {
                 children: [
                   Expanded(
                     child: Text(
-                        'Data selecionada: ${DateFormat('d MMM y').format(_selectedDate)}'),
+                      'Data selecionada: ${DateFormat('d MMM y').format(_selectedDate)}',
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).textScaleFactor * 20,
+                      ),
+                    ),
                   ),
                   TextButton(
                     style: TextButton.styleFrom(
@@ -77,7 +86,12 @@ class _TransactionFormState extends State<TransactionForm> {
                       textStyle: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onPressed: _showDatePicker,
-                    child: const Text('Selecionar data'),
+                    child: Text(
+                      'Selecionar data',
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).textScaleFactor * 15,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -91,11 +105,11 @@ class _TransactionFormState extends State<TransactionForm> {
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
                   onPressed: _submitForm,
-                  child: const Text(
+                  child: Text(
                     'Inserir',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
+                      fontSize: MediaQuery.of(context).textScaleFactor * 20,
                     ),
                   ),
                 ),

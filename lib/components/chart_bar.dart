@@ -14,52 +14,70 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 20,
-          child: FittedBox(
-            child: Text(value.toStringAsFixed(2)),
-          ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        SizedBox(
-          height: 60,
-          width: 10,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromRGBO(220, 220, 220, 1),
-                    width: 1.0,
-                  ),
-                  color: const Color.fromRGBO(220, 220, 220, 1),
-                  borderRadius: BorderRadius.circular(5),
+    return LayoutBuilder(builder: (
+      BuildContext context,
+      BoxConstraints constraints,
+    ) {
+      return Column(
+        children: [
+          SizedBox(
+            height: constraints.maxHeight * 0.15,
+            child: FittedBox(
+              child: Text(
+                value.toStringAsFixed(2),
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).textScaleFactor * 20,
                 ),
               ),
-              FractionallySizedBox(
-                heightFactor: percentage,
-                child: Container(
+            ),
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.05,
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.6,
+            width: 10,
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
                   decoration: BoxDecoration(
-                    color: percentage > 0.85
-                        ? Colors.red[700]
-                        : Theme.of(context).primaryColor,
+                    border: Border.all(
+                      color: const Color.fromRGBO(220, 220, 220, 1),
+                      width: 1.0,
+                    ),
+                    color: const Color.fromRGBO(220, 220, 220, 1),
                     borderRadius: BorderRadius.circular(5),
                   ),
                 ),
-              )
-            ],
+                FractionallySizedBox(
+                  heightFactor: percentage,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: percentage > 0.85
+                          ? Colors.red[700]
+                          : Theme.of(context).primaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        Text(label),
-      ],
-    );
+          SizedBox(
+            height: constraints.maxHeight * 0.05,
+          ),
+          SizedBox(
+            height: constraints.maxHeight * 0.15,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).textScaleFactor * 15,
+              ),
+            ),
+          ),
+        ],
+      );
+    });
   }
 }

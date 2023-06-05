@@ -31,7 +31,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Transaction> transactions = [];
+  List<Transaction> transactions = [
+    Transaction(id: '123', title: 'any_1', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_2', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_3', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_4', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_5', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_6', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_7', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_8', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_9', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_10', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_11', value: 3321, date: DateTime.now()),
+    Transaction(id: '123', title: 'any_12', value: 3321, date: DateTime.now()),
+  ];
 
   List<Transaction> get _recentTransactions {
     DateTime lastSeventhDay = DateTime.now().subtract(const Duration(days: 7));
@@ -75,34 +88,44 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Theme.of(context).primaryColor,
-        title: const Text(
-          'Despesas pessoais',
-          style: TextStyle(fontWeight: FontWeight.bold),
+    final appBar = AppBar(
+      centerTitle: true,
+      backgroundColor: Theme.of(context).primaryColor,
+      title: Text(
+        'Despesas pessoais',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 20 * MediaQuery.of(context).textScaleFactor,
         ),
-        actions: [
-          IconButton(
-            onPressed: () => _openTransactionFormModal(context),
-            icon: const Icon(Icons.add),
-          ),
-        ],
       ),
+      actions: [
+        IconButton(
+          onPressed: () => _openTransactionFormModal(context),
+          icon: const Icon(Icons.add),
+        ),
+      ],
+    );
+    final availableHeight = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(recentTransactions: _recentTransactions),
-            Column(
-              children: [
-                TransactionsList(
-                  transactions: transactions,
-                  onDelete: _deleteTransaction,
-                ),
-              ],
-            )
+            SizedBox(
+              height: availableHeight * 0.3,
+              child: Chart(recentTransactions: _recentTransactions),
+            ),
+            SizedBox(
+              height: availableHeight * 0.7,
+              child: TransactionsList(
+                transactions: transactions,
+                onDelete: _deleteTransaction,
+              ),
+            ),
           ],
         ),
       ),

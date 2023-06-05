@@ -10,9 +10,10 @@ class EmptyScreen extends StatelessWidget {
       children: [
         Text(
           message,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontFamily: 'Pangolin',
+            fontSize: MediaQuery.of(context).textScaleFactor * 20,
           ),
         ),
         const SizedBox(
